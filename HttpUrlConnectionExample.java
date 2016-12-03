@@ -20,9 +20,9 @@ public class HttpUrlConnectionExample {
 	  //System.out.println(form.asXml());
 	  //final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputsByValue("LOGIN");
 	  final HtmlTextInput textField = form.getInputByName("sid");
-	  textField.setValueAttribute("E01485860");
+	  textField.setValueAttribute(*******");
 	  final HtmlPasswordInput textField2 = form.getInputByName("PIN");
-	  textField2.setValueAttribute("617420");
+	  textField2.setValueAttribute("******");
 	  final HtmlPage page2 = (HtmlPage) form.getInputByValue("Login").click();
 	  //String cookie = page2.getElementById("js_cookie").getAttribute("value");
 	  System.out.println(page2.asText());
