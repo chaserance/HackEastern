@@ -11,8 +11,8 @@ public interface Browser {
 	 */
 	public boolean logSuccessful(String EID, String PIN);
 	/**
-	 * Return a ArrayList with major name  
+	 * Return a string array with major name  
 	 * @return
 	 */
-	public ArrayList<String> majorList();
+	public String[] majorList();
 }
