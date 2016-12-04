@@ -1,9 +1,11 @@
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
+import java.io.IOException;
 import java.util.*;
 
 
@@ -14,8 +16,10 @@ public class Search
 	final String PASSWORD = "910813";
 	String classCode;
 	String classNum;
-	String xmlResult;
-	String textResult;
+//	String xmlResult;
+//	String textResult;
+	
+	ArrayList<HtmlPage> pages = new ArrayList<HtmlPage>();
 	
 	HtmlPage currentPage;
 	//String banner = "http://catalog.emich.edu/content.php?catoid=20&navoid=4199";
@@ -55,26 +59,51 @@ public class Search
 		HtmlAnchor link = (HtmlAnchor) currentPage.getFormByName("course_search").getElementsByTagName("a");
 		System.out.println(link.asXml());
 		*/
-		this.textResult = currentPage.asText();
-		this.xmlResult = currentPage.asXml();
+		//this.textResult = currentPage.asText();
+		//this.xmlResult = currentPage.asXml();
+		
+		//System.out.println(currentPage.asXml());
 		List<HtmlElement> tags=currentPage.getDocumentElement().getElementsByAttribute("th", "CLASS", "ddtitle");
+		
 		ArrayList<String> links = new ArrayList<String>();
 		for(HtmlElement e : tags)
 		{
-			String current = e.asXml().toString();
+			String current = e.asXml();
+			//System.out.println(current);
 			int start = current.indexOf("a href=");
 			int end = current.indexOf("\"",start+9);
 			String result = current.substring(start+8,end);
-			System.out.println(result);
+			//System.out.println(result);
 			links.add(result);
+		}		
+		
+		getPageContent(links, currentPage);
+		for(HtmlPage p: this.pages)
+		{
+			System.out.println(p.asText());
 		}
-		System.out.println("done");
 		myClient.close();
+
 	}
 	
-	public void getPageContent(ArrayList<String> links)
+	private void getPageContent(ArrayList<String> patterns, HtmlPage page)
 	{
-		String url ="https://bannerweb.emich.edu/";
-		ArrayList<String> 
+		//String url ="https://bannerweb.emich.edu/";
+		ArrayList<HtmlAnchor> anchors = new ArrayList<HtmlAnchor>();
+		ArrayList<HtmlPage> pages = new ArrayList<HtmlPage>();
+		for(String s : patterns)
+		{
+			s = s.replaceAll("&amp;", "&");
+			HtmlAnchor anchor = page.getAnchorByHref(s);
+			try 
+			{
+				this.pages.add(anchor.click());
+			} 
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }
