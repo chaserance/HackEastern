@@ -1,6 +1,5 @@
 package edu.emich.hackeastern.Utility;
 
-import java.util.*;
 
 public interface Browser {
 	/**
@@ -9,10 +8,10 @@ public interface Browser {
 	 * @param PIN
 	 * @return 
 	 */
-	public boolean logSuccessful(String EID, String PIN);
+	public boolean logSuccessful(String EID, String PIN) throws Exception;
 	/**
-	 * Return a string array with major name  
+	 * Return a ArrayList with major name  
 	 * @return
 	 */
-	public String[] majorList();
+	public String[] majorList() throws Exception;
 }
