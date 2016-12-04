@@ -77,12 +77,7 @@ public class Search
 		}		
 		
 		getPageContent(links, currentPage);
-		for(HtmlPage p: this.pages)
-		{
-			System.out.println(p.asText());
-		}
-		myClient.close();
-
+		//myClient.close();
 	}
 	
 	private void getPageContent(ArrayList<String> patterns, HtmlPage page)
