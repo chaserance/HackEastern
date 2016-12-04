@@ -16,10 +16,8 @@ public class Search
 	final String PASSWORD = "910813";
 	String classCode;
 	String classNum;
-//	String xmlResult;
-//	String textResult;
 	
-	ArrayList<HtmlPage> pages = new ArrayList<HtmlPage>();
+	ArrayList<HtmlPage> pages;
 	
 	HtmlPage currentPage;
 	//String banner = "http://catalog.emich.edu/content.php?catoid=20&navoid=4199";
@@ -27,6 +25,7 @@ public class Search
 	
 	public Search(String code, String num) throws Exception 
 	{
+		this.pages = new ArrayList<HtmlPage>();
 		this.classCode = code.toUpperCase();
 		this.classNum = num;
 		this.banner = "https://bannerweb.emich.edu/pls/berp/bwckctlg.p_disp_listcrse?term_in=201720&subj_in="
